@@ -18,6 +18,8 @@
 package haveno.daemon.grpc;
 
 import com.google.inject.Inject;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import haveno.common.config.Config;
 import haveno.core.api.CoreApi;
 import haveno.core.api.model.PaymentAccountForm;
@@ -27,6 +29,7 @@ import haveno.core.payment.PaymentAccountFactory;
 import haveno.core.payment.payload.PaymentAccountPayload;
 import haveno.core.payment.payload.PaymentMethod;
 import haveno.core.proto.CoreProtoResolver;
+import haveno.core.trade.HavenoUtils;
 import haveno.daemon.grpc.interceptor.CallRateMeteringInterceptor;
 import haveno.daemon.grpc.interceptor.GrpcCallRateMeter;
 import static haveno.daemon.grpc.interceptor.GrpcServiceRateMeteringConfig.getCustomRateMeteringInterceptor;
@@ -55,6 +58,7 @@ import haveno.proto.grpc.ValidateFormFieldRequest;
 import io.grpc.ServerInterceptor;
 import io.grpc.stub.StreamObserver;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
@@ -77,7 +81,21 @@ class GrpcPaymentAccountsService extends PaymentAccountsImplBase {
     public void createPaymentAccount(CreatePaymentAccountRequest req,
                                      StreamObserver<CreatePaymentAccountReply> responseObserver) {
         try {
-            PaymentAccount paymentAccount = coreApi.createPaymentAccount(PaymentAccountForm.fromProto(req.getPaymentAccountForm()));
+            String formJson = req.getPaymentAccountFormAsJson();
+            PaymentAccountForm form;
+            if (formJson == null || formJson.isBlank()) {
+                form = PaymentAccountForm.fromProto(req.getPaymentAccountForm());
+            } else {
+                Map<String, Object> formMap = new Gson().fromJson(formJson, new TypeToken<Map<String, Object>>() {}.getType());
+                form = coreApi.getPaymentAccountForm((String) formMap.get("paymentMethodId"));
+                for (PaymentAccountFormField field : form.getFields()) {
+                    String camelCase = HavenoUtils.toCamelCase(field.getId().toString());
+                    if (formMap.containsKey(camelCase)) {
+                        field.setValue((String) formMap.get(camelCase));
+                    }
+                }
+            }
+            PaymentAccount paymentAccount = coreApi.createPaymentAccount(form);
             var reply = CreatePaymentAccountReply.newBuilder()
                     .setPaymentAccount(paymentAccount.toProtoMessage())
                     .build();
