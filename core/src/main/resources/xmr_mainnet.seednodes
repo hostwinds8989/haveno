@@ -1,2 +1,6 @@
 # nodeaddress.onion:port [(@owner,@backup)]
-placeholder.onion:8000 (@placeholder)
+# Replace the two lines below with the onion addresses printed when you run:
+#   make seednode   -> <seednode1>.onion:1002
+#   make seednode2  -> <seednode2>.onion:1003
+# seednode1.onion:1002 (@seednode1)
+# seednode2.onion:1003 (@seednode2)

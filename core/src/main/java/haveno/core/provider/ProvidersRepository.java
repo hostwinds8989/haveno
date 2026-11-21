@@ -50,7 +50,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ProvidersRepository {
 
     private static final String DEFAULT_LOCAL_NODE = "http://localhost:8078/";
-    private static final List<String> DEFAULT_NODES = Arrays.asList(
+    private static final List<String> DEFAULT_NODES = Arrays.asList( // add your deployed price node onion URL here (https://github.com/haveno-dex/haveno-pricenode)
             "http://lrrgpezvdrbpoqvkavzobmj7dr2otxc5x6wgktrw337bk6mxsvfp5yid.onion/", // Cake
             "http://agorise7ae5g7lkqp7r7qddsyzskft7cqhgguwkadbqamtsrap5onead.onion/", // Agorise
             "http://glex4bepv2jqa7imsd5k4pqec7lyubbwzj27tlxnoydl63fmsttmroqd.onion/" // Glex

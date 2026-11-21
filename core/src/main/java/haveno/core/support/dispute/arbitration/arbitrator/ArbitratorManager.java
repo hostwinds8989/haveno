@@ -36,6 +36,7 @@ package haveno.core.support.dispute.arbitration.arbitrator;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import haveno.common.app.DevEnv;
 import haveno.common.config.Config;
 import haveno.common.crypto.KeyRing;
 import haveno.core.filter.FilterManager;
@@ -78,7 +79,7 @@ public class ArbitratorManager extends DisputeAgentManager<Arbitrator> {
                     "02a1a458df5acf4ab08fdca748e28f33a955a30854c8c1a831ee733dca7f0d2fcd",
                     "0374dd70f3fa6e47ec5ab97932e1cec6233e98e6ae3129036b17118650c44fd3de");
         case XMR_MAINNET:
-            return List.of();
+            return List.of(DevEnv.NETWORK_PUBLIC_KEY);
         default:
             throw new RuntimeException("Unhandled base currency network: " + Config.baseCurrencyNetwork());
         }

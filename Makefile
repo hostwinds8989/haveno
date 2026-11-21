@@ -492,7 +492,7 @@ haveno-desktop-stagenet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=Haveno \
+		--appName=HavenoX \
 		--apiPassword=apitest \
 		--apiPort=3204 \
 
@@ -502,7 +502,7 @@ haveno-daemon-stagenet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=Haveno \
+		--appName=HavenoX \
 		--apiPassword=apitest \
 		--apiPort=3204 \
 		--useNativeXmrWallet=false \
@@ -595,7 +595,7 @@ haveno-daemon-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=Haveno \
+		--appName=HavenoX \
 		--apiPassword=apitest \
 		--apiPort=1201 \
 		--useNativeXmrWallet=false \
@@ -607,7 +607,7 @@ haveno-desktop-mainnet:
 		--useLocalhostForP2P=false \
 		--useDevPrivilegeKeys=false \
 		--nodePort=9999 \
-		--appName=Haveno \
+		--appName=HavenoX \
 		--apiPassword=apitest \
 		--apiPort=1201 \
 		--ignoreLocalXmrNode=false \

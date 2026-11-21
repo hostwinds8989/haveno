@@ -31,6 +31,11 @@ public class DevEnv {
     public static final String DEV_PRIVILEGE_PUB_KEY = "027a381b5333a56e1cc3d90d3a7d07f26509adf7029ed06fc997c656621f8da1ee";
     public static final String DEV_PRIVILEGE_PRIV_KEY = "6ac43ea1df2a290c1c8391736aa42e4339c5cb4f110ff0257a13b63211977b7a";
 
+    // NETWORK OPERATOR: replace the placeholder below with the PUBLIC key printed by `./gradlew generateKeypairs`.
+    // The same key is used for alerts, arbitrator registration, filters, and private notifications.
+    // Keep the matching private key secret; use it in the UI to register the arbitrator (ctrl+r) and add filters (ctrl+f).
+    public static final String NETWORK_PUBLIC_KEY = "PASTE_PUBLIC_KEY_HEX_HERE";
+
     public static void setup(Config config) {
         DevEnv.setDevMode(config.useDevMode);
     }

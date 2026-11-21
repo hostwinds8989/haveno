@@ -63,7 +63,7 @@ public class HavenoInstaller {
     private static final List<String> PINNED_SIGNING_KEY_FINGERPRINTS = List.of(
             // e.g. "1DC3C8C4316A698AC494039CF5B84436F379A1C6"
     );
-    private static final String DOWNLOAD_HOST_URL = "https://haveno.exchange/downloads/";
+    private static final String DOWNLOAD_HOST_URL = "https://havenoexample.com/downloads/";
 
     public boolean isSupportedOS() {
         return Utilities.isOSX() || Utilities.isWindows() || Utilities.isDebianLinux() || Utilities.isRedHatLinux();
