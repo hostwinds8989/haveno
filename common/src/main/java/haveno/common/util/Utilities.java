@@ -267,9 +267,10 @@ public class Utilities {
             // https://stackoverflow.com/questions/20856694/how-to-find-the-os-bit-type
             String arch = System.getenv("PROCESSOR_ARCHITECTURE");
             String wow64Arch = System.getenv("PROCESSOR_ARCHITEW6432");
-            return arch.endsWith("64")
-                    || wow64Arch != null && wow64Arch.endsWith("64")
-                    ? "64" : "32";
+            if (arch != null && arch.endsWith("64")) return "64";
+            if (wow64Arch != null && wow64Arch.endsWith("64")) return "64";
+            // Fall back to os.arch when the PROCESSOR_* env vars are unavailable (e.g. restricted environments)
+            return osArch != null && osArch.contains("64") ? "64" : "32";
         } else if (osArch.contains("arm")) {
             // armv8 is 64 bit, armv7l is 32 bit
             return osArch.contains("64") || osArch.contains("v8") ? "64" : "32";
